@@ -14,8 +14,12 @@
                         <div class="card-body text-center">
                             <h3 class="card-title">{{product.name}}</h3>
                             <h4>{{product.model}}</h4>
-                            <h5>{{product.price}}</h5>
-                            <a href="#" class="btn btn-danger">Ajouter au panier</a>
+                            <h5>{{product.price}} $</h5>
+                            {% if product.quantity > 0 %}
+                                <a href="#" class="btn btn-danger">Add to cart</a>
+                            {% else %}
+                                <a href="#" class="btn btn-danger disabled">Out of stock</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

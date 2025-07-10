@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\ProductsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Enum\ProductTypeEnum;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProductsRepository::class)]
 class Products
@@ -20,6 +22,7 @@ class Products
     private ?string $model = null;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
+    #[Assert\PositiveOrZero(message: "The price must be positive or zero.")]
     private ?string $price = null;
 
     #[ORM\Column]
@@ -27,6 +30,9 @@ class Products
 
     #[ORM\Column(length: 255)]
     private ?string $image = null;
+
+    #[ORM\Column(enumType: ProductTypeEnum::class)]
+    private ?ProductTypeEnum $type = null;
 
     public function getId(): ?int
     {
@@ -96,6 +102,18 @@ class Products
     public function setImage(string $image): static
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getType(): ?ProductTypeEnum
+    {
+        return $this->type;
+    }
+
+    public function setType(ProductTypeEnum $type): static
+    {
+        $this->type = $type;
 
         return $this;
     }
