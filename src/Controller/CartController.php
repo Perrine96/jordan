@@ -34,9 +34,12 @@ final class CartController extends AbstractController
             }
         }
 
+        $cartCount = array_sum($cart);
+
         return $this->render('cart/cart.html.twig', [
             'cart' => $cartData,
             'total' => $total,
+            'cartCount' => $cartCount,
         ]);
     }
 

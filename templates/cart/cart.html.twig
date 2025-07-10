@@ -4,6 +4,15 @@
 
 {% block body %}
     <h1 class="text-center mt-5 fs-1 fw-bold">Your Cart</h1>
+    <div class="d-flex justify-content-center">
+    <p>
+        <i class="bi bi-cart"></i>
+        Articles
+        {% if cartCount > 0 %}
+            <span class="badge bg-danger">{{ cartCount }}</span>
+        {% endif %}
+    </p>
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-md-12">

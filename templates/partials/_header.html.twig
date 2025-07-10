@@ -9,16 +9,18 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{{ path('app_home') }}">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ path('app_cart') }}">Cart</a>
+        <li class="nav-item position-relative">
+          <a class="nav-link" href="{{ path('app_cart') }}">
+            <i class="fa-solid fa-cart-shopping" style="font-size: 1.3rem;"></i>
+            {% if cartCount is defined and cartCount > 0 %}
+              <span class="position-absolute top-3 start-95 translate-middle badge rounded-pill bg-danger">
+                {{ cartCount }}
+              </span>
+            {% endif %}
+          </a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-              <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-            </svg>
-          </a>
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-user" style="font-size: 1.3rem;"></i></a>
           <ul class="dropdown-menu">
             {% if app.user %}
             <li><a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a></li>
