@@ -1,0 +1,7 @@
+.zoom-card {
+    transition: transform 0.2s ease;
+}
+.zoom-card:hover {
+    transform: scale(1.05);
+    z-index: 2;
+}

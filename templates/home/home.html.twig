@@ -4,19 +4,27 @@
 
 {% block body %}
     <h1 class = "text-center mt-5 fs-1 fw-bold">Welcome to Jordan</h1>
-    <h2 class = "text-center mt-3 text-danger">Our Products</h2>
+    <h2 class = "text-center mt-3 mb-5 text-danger">Our Products</h2>
+    <form method="get" class="mb-4 text-center">
+        <label for="type" class="me-2 fw-bold">Sort by:</label>
+        <select name="type" id="type" onchange="this.form.submit()" class="form-select d-inline-block w-auto">
+            <option value="">All</option>
+            <option value="clothes" {{ app.request.get('type') == 'clothes' ? 'selected' : '' }}>Clothes</option>
+            <option value="shoes" {{ app.request.get('type') == 'shoes' ? 'selected' : '' }}>Shoes</option>
+        </select>
+    </form>
     <div class="container">
         <div class="row justify-content-center">
             {% for product in products %}
                 <div class="col-md-4 d-flex justify-content-center mb-4">
-                    <div class="card shadow-sm border-danger" style="max-width: 18rem; width: 100%;">
+                    <div class="card shadow-sm border-danger zoom-card" style="max-width: 18rem; width: 100%;">
                         <img src="{{ product.image }}" class="card-img-top" alt="">
                         <div class="card-body text-center">
                             <h3 class="card-title">{{product.name}}</h3>
                             <h4>{{product.model}}</h4>
                             <h5>{{product.price}} $</h5>
                             {% if product.quantity > 0 %}
-                                <a href="#" class="btn btn-danger">Add to cart</a>
+                                <a href="{{ path('cart_add', {'id': product.id}) }}" class="btn btn-danger">Add to cart</a>
                             {% else %}
                                 <a href="#" class="btn btn-danger disabled">Out of stock</a>
                             {% endif %}
