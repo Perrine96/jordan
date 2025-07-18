@@ -12,6 +12,8 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Validator\Constraints\Regex;
+
 
 class RegistrationFormType extends AbstractType
 {
@@ -35,7 +37,7 @@ class RegistrationFormType extends AbstractType
                 'second_options' => [
                     'label' => 'Confirm Password', 'attr' => ['class' => 'form-control']
                 ],
-                'invalid_message' => 'Les mots de passe doivent correspondre.',
+                'invalid_message' => 'The passwords do not match.',
                 'mapped' => false,
                 'required' => true,
                 'constraints' => [
@@ -46,6 +48,10 @@ class RegistrationFormType extends AbstractType
                         'min' => 6,
                         'minMessage' => 'Your password should be at least {{ limit }} characters',
                         'max' => 4096,
+                    ]),
+                    new Regex([
+                        'pattern' =>  '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/',
+                        'message' => 'The password must contain at least one uppercase letter, one lowercase letter, one number and one special character',
                     ]),
                 ],
             ])

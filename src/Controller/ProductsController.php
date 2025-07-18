@@ -2,25 +2,23 @@
 
 namespace App\Controller;
 
-use App\Repository\ProductsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use App\Entity\Products;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\ProductsRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Cart;
 
-
-final class HomeController extends AbstractController
+final class ProductsController extends AbstractController
 {
-    #[Route('/', name: 'app_home')]
+    #[Route('/products', name: 'app_products')]
     public function index(ProductsRepository $productsRepository, Request $request, EntityManagerInterface $em): Response {
         $type = $request->query->get('type');
         if ($type) {
             $products = $productsRepository->findBy(['type' => $type]);
         } else {
-            $products = $productsRepository->findBy([], ['id' => 'DESC'], 3);
+            $products = $productsRepository->findAll();
         }
 
         $user = $this->getUser();
@@ -34,10 +32,9 @@ final class HomeController extends AbstractController
             }
         }
 
-        return $this->render('home/home.html.twig', [
+        return $this->render('products/products.html.twig', [
             'products' => $products,
             'cartCount' => $cartCount,
         ]);
     }
 }
-

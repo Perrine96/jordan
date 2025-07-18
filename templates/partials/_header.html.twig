@@ -1,32 +1,39 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-danger navbar-dark">
   <div class="container-fluid">
-    <a class="navbar-brand fw-bold" href="#">Jordan</a>
+    <a class="navbar-brand fw-bold text-white" href="#">Jordan</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{{ path('app_home') }}">Home</a>
+          <a class="nav-link active text-white" aria-current="page" href="{{ path('app_home') }}">Home</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link active text-white" aria-current="page" href="{{ path('app_products') }}">Products</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto">
         <li class="nav-item position-relative">
-          <a class="nav-link" href="{{ path('app_cart') }}">
+          <a class="nav-link text-white" href="{{ path('app_cart') }}">
             <i class="fa-solid fa-cart-shopping" style="font-size: 1.3rem;"></i>
             {% if cartCount is defined and cartCount > 0 %}
-              <span class="position-absolute top-3 start-95 translate-middle badge rounded-pill bg-danger">
+              <span class="position-absolute top-3 start-95 translate-middle badge rounded-pill bg-dark">
                 {{ cartCount }}
               </span>
             {% endif %}
           </a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-user" style="font-size: 1.3rem;"></i></a>
-          <ul class="dropdown-menu">
+          <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-solid fa-user" style="font-size: 1.3rem;"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
             {% if app.user %}
-            <li><a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a></li>
+              <li><a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a></li>
             {% else %}
-            <li><a class="dropdown-item" href="{{ path('app_register') }}">Register</a></li>
-            <li><a class="dropdown-item" href="{{ path('app_login') }}">Login</a></li>
+              <li><a class="dropdown-item" href="{{ path('app_register') }}">Register</a></li>
+              <li><a class="dropdown-item" href="{{ path('app_login') }}">Login</a></li>
             {% endif %}
           </ul>
         </li>

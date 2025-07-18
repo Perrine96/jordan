@@ -3,18 +3,29 @@
 {% block title %}Jordan - Home{% endblock %}
 
 {% block body %}
-    <h1 class = "text-center mt-5 fs-1 fw-bold">Welcome to Jordan</h1>
-    <h2 class = "text-center mt-3 mb-5 text-danger">Our Products</h2>
-    <form method="get" class="mb-4 text-center">
-        <label for="type" class="me-2 fw-bold">Sort by:</label>
-        <select name="type" id="type" onchange="this.form.submit()" class="form-select d-inline-block w-auto">
-            <option value="">All</option>
-            <option value="clothes" {{ app.request.get('type') == 'clothes' ? 'selected' : '' }}>Clothes</option>
-            <option value="shoes" {{ app.request.get('type') == 'shoes' ? 'selected' : '' }}>Shoes</option>
-        </select>
-    </form>
+  <section class="py-5 bg-dark text-white">
     <div class="container">
-        <div class="row justify-content-center">
+      <div class="row align-items-center">
+        <div class="col-md-6 text-center text-md-start">
+          <h1 class="display-3 fw-bold mb-3 text-white">Welcome to <span class="text-danger">Jordan</span></h1>
+          <p class="lead mb-4 text-white">
+            Discover our exclusive selection of sneakers and trendy clothing.<br>
+            <br>
+            Get the best deals and a unique shopping experience!
+          </p>
+          <a href="{{ path('app_products') }}" class="btn btn-danger btn-lg px-4 me-2">See products</a>
+        </div>
+        <div class="col-md-6 text-center mt-4 mt-md-0">
+          <img src="{{ asset('img/hero.jpg') }}"
+               alt="Jordan Hero" class="img-fluid rounded shadow-lg" style="max-height: 350px;">
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="py-5">
+    <div class="container">
+      <div class="row justify-content-center">
+          <h2 class="text-center mb-4">Our Latest Products</h2>
             {% for product in products %}
                 <div class="col-md-4 d-flex justify-content-center mb-4">
                     <div class="card shadow-sm border-danger zoom-card" style="max-width: 18rem; width: 100%;">
@@ -32,8 +43,10 @@
                     </div>
                 </div>
             {% endfor %}
-        </div>
-        <div class="d-flex justify-content-center mt-4">
-        </div>
+            <div class="d-flex justify-content-center mt-4">
+                <a href="{{ path('app_products') }}" class="btn btn-dark">See all products</a>
+            </div>
+      </div>
     </div>
+  </section>
 {% endblock %}
